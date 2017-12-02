@@ -6,6 +6,85 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div id="characters">
+        <h2>Choose your character</h2>
+        <form class="flex-container">
+            <a href="#" class="choosen">
+                <h3>
+                    <input type="radio" name="character" value="images/char-boy.png" checked>
+                    <label>Boy</label>
+                </h3>
+                <img src="images/char-boy.png" alt="The Boy character">
+            </a>
+            <a href="#">
+                <h3>
+                    <input type="radio" name="character" value="images/char-cat-girl.png">
+                    <label>Cat Girl</label>
+                </h3>
+                <img src="images/char-cat-girl.png" alt="The Cat Girl character">
+            </a>
+            <a href="#">
+                <h3>
+                    <input type="radio" name="character" value="images/char-horn-girl.png">
+                    <label>Horn Girl</label>
+                </h3>
+                <img src="images\char-horn-girl.png" alt="The Horn Girl character">
+            </a>
+            <a href="#">
+                <h3>
+                    <input type="radio" name="character" value="images/char-pink-girl.png">
+                    <label>Pink Girl</label>
+                </h3>
+                <img src="images\char-pink-girl.png" alt="The Pink Girl character">
+            </a>
+            <a href="#">
+                <h3>
+                    <input type="radio" name="character" value="images/char-princess-girl.png">
+                    <label>Princess</label>
+                </h3>
+                <img src="images\char-princess-girl.png" alt="The Princess character">
+            </a>
+        </form>
+        <button id="start-game">Start Game</button>
+    </div>
+    <script>
+        var characters = document.querySelectorAll('#characters a'),
+            global = this;
+
+        document.getElementById('start-game').addEventListener('click', function(e) {
+            event.preventDefault();
+            startGame();
+        })
+
+        for (character of characters) {
+            character.addEventListener('click', function(e) {
+                e.preventDefault();
+                selectCharacter(this);
+            })
+        }
+
+        function unselectPreviousCharacter() {
+            document.querySelector('#characters a.choosen').classList.remove('choosen')
+        }
+
+        function selectCharacter(character) {
+            unselectPreviousCharacter();
+            character.className += 'choosen';
+            character.querySelector('input').checked = true;
+            player.sprite = document.querySelector('.choosen input').value;
+        }
+
+        function removeCharacters() {
+            element = document.getElementById('characters');
+            element.outerHTML = '';
+            delete element;
+        }
+
+        function startGame() {
+            removeCharacters();
+            Engine(global);
+        }
+    </script>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
